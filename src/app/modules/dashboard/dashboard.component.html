@@ -1,0 +1,44 @@
+<mat-drawer-container class="dashboard-container" [hasBackdrop]="false">
+  <mat-drawer #drawer [mode]="'side'" class="sidenav">
+    <div class="container-fluid">
+      <div class="row header">
+        <div class="col">
+          <h1 class="logo-title">
+            <span id="logo"></span>
+            <span class="title">WAITME</span>
+          </h1>
+        </div>
+      </div>
+      <div class="row content-nav">
+        <div class="col">
+          <ul>
+            <li>
+              General
+            </li>
+            <li>
+              Admin
+              <ul>
+                <li>
+                  Menu Item
+                </li>
+                <li>
+                  <a routerLink="/item-option">Options</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <button mat-raised-button (click)="drawer.toggle()" class="btn-toggle-float"><span class="icon menu-drawer"></span></button>
+    <app-header></app-header>
+    <div class="content container-fluid">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
+
+
+

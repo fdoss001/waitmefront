@@ -1,0 +1,64 @@
+@import "../../../assets/styles/variables";
+
+.dashboard-container {
+  background-color: transparent;
+  height: 100%;
+
+  .container-fluid{
+    padding: 0px;
+  }
+
+  .sidenav {
+    width: 200px;
+    background-color: $black_light;
+    color: $white_gray;
+
+    .header,
+    .content-nav {
+      width: 100%;
+      padding: 20px;
+    }
+
+    .header{
+      #logo{
+        content: url("../../../assets/img/waitme-512.png");
+        width: 40px;
+        height: 40px;
+        float: left;
+        margin: 0px;
+      }
+      .logo-title{
+        float: left;
+        margin: 0;
+        width: 140px;
+        vertical-align: center;
+
+        .title{
+          padding: 10px 0px;
+        }
+      }
+    }
+  }
+  .content {
+    padding-top: 20px;
+  }
+  .btn-toggle-float {
+    float: left;
+    display: flex;
+    position: fixed;
+    height: 30px;
+    width: 30px;
+    margin: 10px 5px;
+    padding: 0px;
+    z-index: 10;
+    border: 0px;
+
+    span.menu-drawer {
+      content: url("../../../assets/icons/ant-design_menu-unfold-outlined.svg");
+      width: 100%;
+      height: auto;
+      margin: 0px;
+      padding: 0px;
+    }
+  }
+}
