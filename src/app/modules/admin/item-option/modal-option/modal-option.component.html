@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>option.{{data.type}}</h1>
 <div mat-dialog-content>
-  <form #formData="ngForm" autocomplete="off">
+  <form #formData="ngForm" autocomplete="off" onsubmit="sendItemOptionData(data, formData)">
     <div class="row">
       <div class="col">
         <label class="form-label" for="code">

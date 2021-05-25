@@ -19,7 +19,14 @@ export class OptionService {
 
   public getAllItemOptions(companyId: number): Promise<any>{
     const url = '/admin/getAllItemOptions?companyId=' + companyId;
-    return this.http.get<any>(url).toPromise();
+    return this.http.get<any>(url).toPromise().then(
+      res => {
+        return res.payload;
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   public getItemOption(companyId: number, optionId: number): Promise<any>{
@@ -36,22 +43,50 @@ export class OptionService {
 
   public createItemOption(request: Request): Promise<any>{
     const url = '/admin/createItemOption';
-    return this.http.post<any>(url, request, HTTP_OPTIONS).toPromise();
+    return this.http.post<any>(url, request, HTTP_OPTIONS).toPromise().then(
+      res => {
+        return res.payload;
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   public updateItemOption(request: Request): Promise<any>{
     const url = '/admin/updateItemOption';
-    return this.http.post<any>(url, request, HTTP_OPTIONS).toPromise();
+    return this.http.post<any>(url, request, HTTP_OPTIONS).toPromise().then(
+      res => {
+        return res.payload;
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   public copyItemOption(request: Request): Promise<any>{
     const url = '/admin/copyItemOption';
-    return this.http.post<any>(url, request, HTTP_OPTIONS).toPromise();
+    return this.http.post<any>(url, request, HTTP_OPTIONS).toPromise().then(
+      res => {
+        return res.payload;
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   public toggleActivateItemOption(request: Request): Promise<any>{
     const url = '/admin/toggleActivateItemOption';
-    return this.http.post<any>(url, request, HTTP_OPTIONS).toPromise();
+    return this.http.post<any>(url, request, HTTP_OPTIONS).toPromise().then(
+      res => {
+        return res.payload;
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
 }

@@ -1,5 +1,5 @@
 import { ItemOption } from './../../../../interfaces/item-option';
-import { ModalOptionComponent, DialogData } from './../modal-option/modal-option.component';
+import { ModalOptionComponent, DialogItemOptionData } from './../modal-option/modal-option.component';
 import { OptionService } from './../../../../services/option.service';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
@@ -39,22 +39,33 @@ export class ItemOptionComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  getAllOptions(companyId: number): any{
-    this.optionService.getAllItemOptions(companyId).then(
+  getAllOptions = async (companyId: number) => {
+    await this.optionService.getAllItemOptions(companyId).then(
       res => {
-        this.itemOptions = res.payload.options;
-      },
-      error => {
-        console.log(error);
+        this.itemOptions = res.options;
       }
     );
   }
 
-  modalEditItemOption(itemOption?: any): any{
-    const dataDialog: DialogData = {
+  modalEditItemOption = (itemOption?: any) => {
+    const dataDialog: DialogItemOptionData = {
       type: 'edition',
       companyId: 1000000,
       optionInfo: itemOption,
+    };
+    const dialogRef = this.dialog.open(
+      ModalOptionComponent,
+      {
+        width: '70%',
+        data: dataDialog
+      }
+    );
+  }
+
+  modalCreationItemOption = () => {
+    const dataDialog: DialogItemOptionData = {
+      type: 'creation',
+      companyId: 1000000
     };
     const dialogRef = this.dialog.open(
       ModalOptionComponent,
