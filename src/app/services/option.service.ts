@@ -18,32 +18,32 @@ export class OptionService {
   ) { }
 
   public getAllItemOptions(companyId: number): Promise<any>{
-    const url = 'waitme/admin/getAllItemOptions?companyId=' + companyId;
+    const url = '/admin/getAllItemOptions?companyId=' + companyId;
     return this.http.get<any>(url).toPromise();
   }
 
   public getItemOption(companyId: number, optionId: number): Promise<any>{
-    const url = 'waitme/admin/getItemOption?companyId=' + companyId + '&optionId=' + optionId;
+    const url = '/admin/getItemOption?companyId=' + companyId + '&optionId=' + optionId;
     return this.http.get<any>(url, HTTP_OPTIONS).toPromise();
   }
 
   public createItemOption(request: Request): Promise<any>{
-    const url = 'waitme/admin/createItemOption';
+    const url = '/admin/createItemOption';
     return this.http.post<any>(url, request, HTTP_OPTIONS).toPromise();
   }
 
   public updateItemOption(request: Request): Promise<any>{
-    const url = 'waitme/admin/updateItemOption';
+    const url = '/admin/updateItemOption';
     return this.http.post<any>(url, request, HTTP_OPTIONS).toPromise();
   }
 
   public copyItemOption(request: Request): Promise<any>{
-    const url = 'waitme/admin/copyItemOption';
+    const url = '/admin/copyItemOption';
     return this.http.post<any>(url, request, HTTP_OPTIONS).toPromise();
   }
 
   public toggleActivateItemOption(request: Request): Promise<any>{
-    const url = 'waitme/admin/toggleActivateItemOption';
+    const url = '/admin/toggleActivateItemOption';
     return this.http.post<any>(url, request, HTTP_OPTIONS).toPromise();
   }
 

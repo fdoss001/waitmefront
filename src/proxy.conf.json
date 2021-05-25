@@ -1,6 +1,6 @@
 {
-  "/*": {
-      "target": "http://69.65.94.209:8080",
+  "**": {
+      "target": "https://waitmeapi.herokuapp.com",
       "secure": true,
       "logLevel": "debug",
       "changeOrigin": true
