@@ -24,7 +24,14 @@ export class OptionService {
 
   public getItemOption(companyId: number, optionId: number): Promise<any>{
     const url = '/admin/getItemOption?companyId=' + companyId + '&optionId=' + optionId;
-    return this.http.get<any>(url, HTTP_OPTIONS).toPromise();
+    return this.http.get<any>(url, HTTP_OPTIONS).toPromise().then(
+      res => {
+        return res.payload;
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   public createItemOption(request: Request): Promise<any>{

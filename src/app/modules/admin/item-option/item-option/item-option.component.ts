@@ -1,8 +1,10 @@
+import { ItemOption } from './../../../../interfaces/item-option';
+import { ModalOptionComponent, DialogData } from './../modal-option/modal-option.component';
 import { OptionService } from './../../../../services/option.service';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { ItemOption } from 'src/app/interfaces/item-option';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-item-option',
@@ -21,6 +23,7 @@ export class ItemOptionComponent implements OnInit, AfterViewInit {
 
   constructor(
     private optionService: OptionService,
+    private dialog: MatDialog,
   ) {
     this.itemOptions = [];
     this.dataSource = new MatTableDataSource<ItemOption>(this.itemOptions);
@@ -47,7 +50,18 @@ export class ItemOptionComponent implements OnInit, AfterViewInit {
     );
   }
 
-  modalEditItemOption(code: any): any{
-    console.log(code);
+  modalEditItemOption(itemOption?: any): any{
+    const dataDialog: DialogData = {
+      type: 'edition',
+      companyId: 1000000,
+      optionInfo: itemOption,
+    };
+    const dialogRef = this.dialog.open(
+      ModalOptionComponent,
+      {
+        width: '70%',
+        data: dataDialog
+      }
+    );
   }
 }
