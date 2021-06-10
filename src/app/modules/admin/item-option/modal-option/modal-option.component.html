@@ -1,25 +1,56 @@
 <h1 mat-dialog-title>option.{{data.type}}</h1>
 <div mat-dialog-content>
-  <form #formData="ngForm" autocomplete="off" onsubmit="sendItemOptionData(data, formData)">
-    <div class="row">
+  <form #formData="ngForm" autocomplete="off">
+    <div class="row form-group">
       <div class="col">
-        <label class="form-label" for="code">
+        <label for="id">ID</label>
+        <input type="text" class="form-control form-control-sm" readonly name="id" #id="ngModel" [(ngModel)]="itemOption.id">
+      </div>
+      <div class="col">
+        <label for="code">
           option.form.code
         </label>
-        <input type="text" class="form-control form-control-sm" name="code" #code="ngModel" ngModel>
-      </div>
-      <div class="col">
-        <label class="form-label" for="code">
-          option.form.name
-        </label>
-        <input type="text" class="form-control form-control-sm" name="name" #name="ngModel" ngModel>
+        <input type="text" class="form-control form-control-sm" name="code" #code="ngModel" [(ngModel)]="itemOption.code">
       </div>
     </div>
-
-
+    <div class="row">
+      <div class="col">
+        <label for="name">
+          option.form.name
+        </label>
+        <input type="text" class="form-control form-control-sm" name="name" #name="ngModel" [(ngModel)]="itemOption.name">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="description">
+          option.form.description
+        </label>
+        <textarea class="form-control form-control-sm" name="description" #description="ngModel" [(ngModel)]="itemOption.description"></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="active">
+          option.form.active
+        </label>
+        <input class="form-control form-control-sm" name="active" #active="ngModel" [(ngModel)]="itemOption.active">
+      </div>
+      <div class="col">
+        <label for="price">
+          option.form.price
+        </label>
+        <input class="form-control form-control-sm" name="price" #price="ngModel" [(ngModel)]="itemOption.price">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h4>Nutrition Facts</h4>
+      </div>
+    </div>
   </form>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="closeModalWindows()">Cancel</button>
-  <button mat-button type="submit" cdkFocusInitial>Save</button>
+  <button mat-button (click)="sendItemOptionData(data, formData)" cdkFocusInitial>Save</button>
 </div>

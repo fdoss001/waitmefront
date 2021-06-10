@@ -1,8 +1,9 @@
-import { OptionService } from './../../../../services/option.service';
-import { ItemOption } from './../../../../interfaces/item-option';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NgForm } from '@angular/forms';
+import { OptionService } from 'src/app/services/option.service';
+import { ItemOption, NutritionFacts } from 'src/app/interfaces/item-option';
+import { Request } from 'src/app/interfaces/request';
 
 @Component({
   selector: 'app-modal-option',
@@ -13,7 +14,9 @@ import { NgForm } from '@angular/forms';
 
 export class ModalOptionComponent implements OnInit{
 
-  public formData!: ItemOption;
+  formData!: NgForm;
+  itemOption: ItemOption = {id: -1, code: '', name: '', active: false, price: 0};
+  nutritionFacts: NutritionFacts = { id: -1 };
 
   constructor(
     public dialogRef: MatDialogRef<ModalOptionComponent>,
@@ -29,6 +32,8 @@ export class ModalOptionComponent implements OnInit{
         const optionId = (this.data.optionInfo) ? this.data.optionInfo.id : -1;
         this.getItemOption(this.data.companyId, optionId);
         break;
+      case 'creation':
+        break;
       default: break;
     }
   }
@@ -36,14 +41,31 @@ export class ModalOptionComponent implements OnInit{
   getItemOption = (companyId: number, optionId: number) => {
     this.optionService.getItemOption(companyId, optionId).then(
       (res) => {
-        this.formData = res.option;
-        console.log(this.formData);
+        this.itemOption = res.option;
+        this.nutritionFacts = res.option.nutritionFacts;
+        console.log(this.itemOption, this.nutritionFacts);
       }
     );
   }
 
   sendItemOptionData = (data: DialogItemOptionData, formData: NgForm) => {
-    console.log(data, formData);
+
+///    const temp = this.itemOption.id;
+    this.itemOption = formData.value;
+//    this.itemOption.id = temp;
+    const request: Request = { payload: {
+      user: {
+        id: data.userId,
+        company: {
+          id: data.companyId
+        }
+      },
+      option: this.itemOption
+    }};
+    switch (data.type){
+      case 'edition': this.optionService.updateItemOption(request).then(); break;
+      case 'creation': this.optionService.createItemOption(request).then(); break;
+    }
   }
 
   closeModalWindows = (response?: any) => { this.dialogRef.close(response); };
@@ -51,6 +73,7 @@ export class ModalOptionComponent implements OnInit{
 
 export interface DialogItemOptionData {
   type: 'creation' | 'edition' | 'view';
+  userId: number;
   companyId: number;
   optionInfo?: ItemOption;
 }
